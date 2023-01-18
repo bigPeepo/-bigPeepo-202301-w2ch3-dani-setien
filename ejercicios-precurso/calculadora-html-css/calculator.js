@@ -1,8 +1,7 @@
-// Variable declarations:
-
 const DISPLAY_MAX_CHARACTERS = 8;
 
-let savedDisplay, operatorsInARowCounter;
+let savedDisplay;
+let operatorsInARowCounter;
 
 const operationsDefaultStatus = () => ({
   division: false,
@@ -25,8 +24,6 @@ const substractor = document.getElementById("-");
 const adder = document.getElementById("+");
 
 const buttons = Array.from(document.getElementsByClassName("button"));
-
-// Adding event listeners:
 
 buttons.map((button) => {
   button.addEventListener("click", (e) => {
@@ -73,24 +70,21 @@ buttons.map((button) => {
   });
 });
 
-// Calculator working functions:
-
 const allClear = () => {
   display.innerText = 0;
   savedDisplay = "";
   operatorsInARowCounter = 0;
   operationsStatus = operationsDefaultStatus();
-  // operatorsDefaultColors();
 };
 
 const negation = () => {
-  display.innerText = display.innerText * -1;
+  display.innerText *= -1;
 
   checkValidNumber();
 };
 
 const percentage = () => {
-  display.innerText = display.innerText / 100;
+  display.innerText /= 100;
 
   checkValidNumber();
 };
@@ -121,15 +115,19 @@ const equal = () => {
   if (operationsStatus.division) {
     divideThis();
   }
+
   if (operationsStatus.multiplication) {
     multiplyThis();
   }
+
   if (operationsStatus.rest) {
     restThis();
   }
+
   if (operationsStatus.sum) {
     sumThis();
   }
+
   checkValidNumber();
 
   operatorsHighlight();
@@ -142,7 +140,7 @@ const divideThis = () => {
 };
 
 const multiplyThis = () => {
-  display.innerText = savedDisplay * display.innerText;
+  display.innerText *= savedDisplay;
 
   operationsStatus.multiplication = false;
 };
@@ -154,7 +152,7 @@ const restThis = () => {
 };
 
 const sumThis = () => {
-  display.innerText = +savedDisplay + +display.innerText;
+  display.innerText = Number(savedDisplay) + Number(display.innerText);
 
   operationsStatus.sum = false;
 };
@@ -185,8 +183,6 @@ const printANumber = (number) => {
   operatorsInARowCounter = 0;
 };
 
-// Shielding the display from unsavory results:
-
 const shortenThisNumber = () => {
   const isExponential = display.innerText.includes("e");
   const hasComma = display.innerText.includes(".");
@@ -205,11 +201,11 @@ const shortenThisNumber = () => {
 };
 
 const toExponential = (num) => {
-  display.innerText = (+num).toExponential(0);
+  display.innerText = Number(num).toExponential(0);
 };
 
 const checkForNaN = () => {
-  if (isNaN(+display.innerText) || display.innerText === "Infinity") {
+  if (isNaN(Number(display.innerText)) || display.innerText === "Infinity") {
     display.innerText = "Error";
   }
 };
@@ -224,19 +220,20 @@ const checkValidNumber = () => {
   checkForNaN();
 };
 
-// Adding a highlight when operators are active:
-
 const operatorsHighlight = () => {
   operatorsDefaultColors();
   if (operationsStatus.division) {
     divisor.classList.add("active");
   }
+
   if (operationsStatus.multiplication) {
     multiplyer.classList.add("active");
   }
+
   if (operationsStatus.rest) {
     substractor.classList.add("active");
   }
+
   if (operationsStatus.sum) {
     adder.classList.add("active");
   }
@@ -244,7 +241,10 @@ const operatorsHighlight = () => {
 
 const operatorsDefaultColors = () => {
   divisor.classList.remove("active");
+
   multiplyer.classList.remove("active");
+
   substractor.classList.remove("active");
+
   adder.classList.remove("active");
 };

@@ -1,3 +1,5 @@
+let user;
+
 const username = () => {
   do {
     user = prompt("What is your username?");
@@ -5,6 +7,7 @@ const username = () => {
       alert(`You need to pick a username.`);
     }
   } while (!user);
+
   return username;
 };
 
@@ -34,7 +37,8 @@ const bingoDisplay = () => {
   console.log("          |                                  |");
   console.log("          |__________________________________|");
 };
-let pickedNumbersArray = [];
+
+const pickedNumbersArray = [];
 function numbersPicked(randomNumber) {
   pickedNumbersArray.push(randomNumber);
 }
@@ -43,9 +47,10 @@ const randomNumberGenerator = () => {
   if (pickedNumbersArray.length) {
     alert("Press OK to draft a new number now.");
   }
-  numberMinimum = 1;
-  numberMaximum = 5;
-  randomNumber = Math.round(
+
+  const numberMinimum = 1;
+  const numberMaximum = 5;
+  const randomNumber = Math.round(
     Math.random() * (numberMaximum - numberMinimum) + numberMinimum
   );
   alert(
@@ -77,7 +82,10 @@ const callLine = (bingoCard) => {
     bingoCard[4] === "X"
   ) {
     bingo();
-    return (done = "Done");
+
+    done = true;
+
+    return done;
   }
 };
 
@@ -93,7 +101,8 @@ const start = () => {
   introduction2();
   do {
     randomNumberGenerator();
-  } while (done !== "Done");
+  } while (!done);
+
   thanks();
 };
 

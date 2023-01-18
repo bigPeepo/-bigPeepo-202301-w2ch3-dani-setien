@@ -545,13 +545,12 @@ const numberOfQuestionsDatabases = 3;
 let currentQuestionDatabase = questions;
 
 const secondsAssigned = 12;
-const setTime = secondsAssigned * 1000;
 
 let gameCounter = 1;
 
 let introductionCounter = 0;
 
-let objectToEncapsulateRankingMetrics = {};
+const objectToEncapsulateRankingMetrics = {};
 
 let rankingSorted = [];
 
@@ -571,7 +570,7 @@ const setDefaultState = () => ({
 
 let state = setDefaultState();
 
-let message = new SpeechSynthesisUtterance();
+const message = new SpeechSynthesisUtterance();
 
 const currentLetter = document.getElementById("question-header");
 const currentQuestion = document.getElementById("current-question");
@@ -657,33 +656,25 @@ nextButton.addEventListener("click", (e) => {
   introductions(introductionCounter);
 });
 
-const getLetterFromCounter = (counter) => {
-  return currentQuestionDatabase[counter].letter;
-};
+const getAnswerFromCounter = (counter) =>
+  currentQuestionDatabase[counter].answer;
 
-const getAnswerFromCounter = (counter) => {
-  return currentQuestionDatabase[counter].answer;
-};
+const getQuestionFromCounter = (counter) =>
+  currentQuestionDatabase[counter].question;
 
-const getQuestionFromCounter = (counter) => {
-  return currentQuestionDatabase[counter].question;
-};
+const getLetterIntroFromCounter = (counter) =>
+  getQuestionFromCounter(counter).split(".")[0];
 
-const getLetterIntroFromCounter = (counter) => {
-  return getQuestionFromCounter(counter).split(".")[0];
-};
-
-const getQuestionWithoutLetterIntroFromCounter = (counter) => {
-  return getQuestionFromCounter(counter).split(".")[1];
-};
+const getQuestionWithoutLetterIntroFromCounter = (counter) =>
+  getQuestionFromCounter(counter).split(".")[1];
 
 const countdownTimer = () => {
   let angle = 0;
 
-  const myInterval = setInterval(function () {
+  const myInterval = setInterval(() => {
     resetCountdownTimerProgressIndicator();
     if (!state.paused) {
-      state.secs = state.secs - 100;
+      state.secs -= 100;
       timer.innerHTML = Math.ceil(state.secs / 1000);
       angle = (state.secs / state.timeAssigned) * 360;
 
@@ -719,17 +710,17 @@ const resetCountdownTimerProgressIndicator = () => {
 if (navigator.mediaDevices.getUserMedia) {
   navigator.mediaDevices
     .getUserMedia({ video: true })
-    .then(function (stream) {
+    .then((stream) => {
       video.srcObject = stream;
     })
-    .catch(function (err0r) {
+    .catch(() => {
       console.log("Something went wrong!");
     });
 }
 
-var SpeechRecognition = webkitSpeechRecognition;
-var SpeechGrammarList = window.webkitSpeechGrammarList;
-var SpeechRecognitionEvent = webkitSpeechRecognitionEvent;
+const SpeechRecognition = webkitSpeechRecognition;
+const SpeechGrammarList = window.webkitSpeechGrammarList;
+const SpeechRecognitionEvent = webkitSpeechRecognitionEvent;
 
 const recognition = new SpeechRecognition();
 
@@ -749,14 +740,17 @@ recognition.onspeechend = function () {
 const questionDatabaseSwitcher = () => {
   switch (gameCounter % 3) {
     case 1:
-      return (currentQuestionDatabase = questions);
-      break;
+      return currentQuestionDatabase;
+
     case 2:
-      return (currentQuestionDatabase = questions2);
-      break;
+      return currentQuestionDatabase;
+
     case 0:
-      return (currentQuestionDatabase = questions3);
-      break;
+      return currentQuestionDatabase;
+
+    default:
+      currentQuestionDatabase = questions;
+      return currentQuestionDatabase;
   }
 };
 
@@ -795,6 +789,7 @@ const answeredQuestionsCounter = () => {
       return endGame();
     }
   }
+
   return state.answerCounter;
 };
 
@@ -865,7 +860,7 @@ const textInputEmptyField = () => {
 const isAnswerRightOrWrong = () => {
   window.speechSynthesis.cancel();
 
-  let querySelectorString =
+  const querySelectorString =
     "#rosco :nth-child(" + (state.turnCounter + 1) + ")";
 
   if (getAnswerFromCounter(state.turnCounter) === state.answer) {
@@ -891,10 +886,9 @@ const isAnswerRightOrWrong = () => {
 };
 
 const countLetterAsAnswered = () => {
-  if (state.answer === "pasapalabra" || state.answer === "") {
-    return;
-  } else {
+  if (!(state.answer === "pasapalabra" || state.answer === "")) {
     currentQuestionDatabase[state.turnCounter].status = 1;
+
     return answeredQuestionsCounter();
   }
 };
@@ -946,21 +940,27 @@ const rankingSorter = () => {
       if (a.correctAnswers > b.correctAnswers) {
         return -1;
       }
+
       if (a.correctAnswers < b.correctAnswers) {
         return 1;
       }
+
       if (a.wrongAnswers > b.wrongAnswers) {
         return -1;
       }
+
       if (a.wrongAnswers < b.wrongAnswers) {
         return 1;
       }
+
       if (a.secondsLeft > b.secondsLeft) {
         return -1;
       }
+
       if (a.secondsLeft < b.secondsLeft) {
         return 1;
       }
+
       return 0;
     }
   );
@@ -1018,7 +1018,7 @@ const questionStatusSetDefault = () => {
 
 const letterColorsSetDefault = () => {
   for (let i = 0; i < 26; i++) {
-    let querySelectorString = "#rosco :nth-child(" + (i + 1) + ")";
+    const querySelectorString = "#rosco :nth-child(" + (i + 1) + ")";
 
     document.querySelector(querySelectorString).style.backgroundColor = "";
   }
@@ -1059,7 +1059,7 @@ const endGame = () => {
 
 const introductions = (num) => {
   if (num < 5) {
-    let intros = [
+    const intros = [
       "Welcome to Pasapalabra. You can type your answer, or click on the 🎤 and say it out loud!",
       "If your answer is correct, you get one point! If you want to leave a question for later, you can click the Pasapalabra button or just hit accept with an empty field.",
       `You will be asked a username for every round you play. There is ${numberOfQuestionsDatabases} different question databases to play with.`,
@@ -1067,8 +1067,9 @@ const introductions = (num) => {
       `You have ${secondsAssigned} seconds to play. You can also choose to end at any time, by typing "end".`,
       "The game will now begin. Good luck!",
     ];
+    currentQuestion.innerHTML = intros[num];
 
-    return (currentQuestion.innerHTML = intros[num]);
+    return currentQuestion.innerHTML;
   }
 
   textFormAndButtons.classList.remove("hidden");
