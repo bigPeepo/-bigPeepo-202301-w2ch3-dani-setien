@@ -8,7 +8,7 @@ const SECONDS_ASSIGNED = 300;
 
 let gameCounter = 1;
 
-let objectToEncapsulateRankingMetrics = {};
+const objectToEncapsulateRankingMetrics = {};
 
 let rankingSorted = [];
 
@@ -64,14 +64,20 @@ let state = setDefaultState();
 const questionDatabaseSwitcher = () => {
   switch (gameCounter % 3) {
     case 1:
-      return (currentQuestionDatabase = questions);
-      break;
+      currentQuestionDatabase = questions;
+      return currentQuestionDatabase;
+
     case 2:
-      return (currentQuestionDatabase = questions2);
-      break;
+      currentQuestionDatabase = questions2;
+      return currentQuestionDatabase;
+
     case 0:
-      return (currentQuestionDatabase = questions3);
-      break;
+      currentQuestionDatabase = questions3;
+      return currentQuestionDatabase;
+
+    default:
+      currentQuestionDatabase = questions3;
+      return currentQuestionDatabase;
   }
 };
 
@@ -110,7 +116,7 @@ const answeredQuestionsCounter = () => {
 };
 
 const skipToNextLetterUnanswered = () => {
-  if (state.answerCounter != currentQuestionDatabase.length) {
+  if (state.answerCounter !== currentQuestionDatabase.length) {
     do {
       if (!currentQuestionDatabase[state.turnCounter].status) {
         return state.turnCounter;
@@ -120,9 +126,9 @@ const skipToNextLetterUnanswered = () => {
     } while (currentQuestionDatabase[state.turnCounter].status);
 
     return state.turnCounter;
-  } else {
-    endGame();
   }
+
+  endGame();
 };
 
 const startTimer = () => {
@@ -146,9 +152,7 @@ const pauseTimer = () => {
   clearInterval(state.intervalId);
 };
 
-const time0padding = (num) => {
-  return (num < 10 && num > 0 ? "0" : "") + num;
-};
+const time0padding = (num) => (num < 10 && num > 0 ? "0" : "") + num;
 
 function updateTime() {
   state.elapsedTime = state.timeAssigned - (Date.now() - state.startTime);
@@ -168,17 +172,14 @@ const askAgainIfCancelled = (message) => {
   return value.toLowerCase().trim();
 };
 
-const getLetterFromCounter = (counter) => {
-  return currentQuestionDatabase[counter].letter;
-};
+const getLetterFromCounter = (counter) =>
+  currentQuestionDatabase[counter].letter;
 
-const getAnswerFromCounter = (counter) => {
-  return currentQuestionDatabase[counter].answer;
-};
+const getAnswerFromCounter = (counter) =>
+  currentQuestionDatabase[counter].answer;
 
-const getQuestionFromCounter = (counter) => {
-  return currentQuestionDatabase[counter].question;
-};
+const getQuestionFromCounter = (counter) =>
+  currentQuestionDatabase[counter].question;
 
 const questionPrompt = () => {
   state.answer = askAgainIfCancelled(getQuestionFromCounter(state.turnCounter));
@@ -216,17 +217,15 @@ const isAnswerRightOrWrong = () => {
     state.correctAnswers++;
 
     return alertSolution(true);
-  } else {
-    state.wrongAnswers++;
-
-    return alertSolution(false);
   }
+
+  state.wrongAnswers++;
+
+  return alertSolution(false);
 };
 
 const markLetterAsAnswered = () => {
-  if (state.answer === "pasapalabra" || state.answer === "") {
-    return;
-  } else {
+  if (!(state.answer === "pasapalabra" || state.answer === "")) {
     currentQuestionDatabase[state.turnCounter].status = 1;
     return answeredQuestionsCounter();
   }
@@ -361,21 +360,27 @@ const rankingSorter = () => {
       if (a.correctAnswers > b.correctAnswers) {
         return -1;
       }
+
       if (a.correctAnswers < b.correctAnswers) {
         return 1;
       }
+
       if (a.wrongAnswers > b.wrongAnswers) {
         return -1;
       }
+
       if (a.wrongAnswers < b.wrongAnswers) {
         return 1;
       }
+
       if (a.secondsLeft > b.secondsLeft) {
         return -1;
       }
+
       if (a.secondsLeft < b.secondsLeft) {
         return 1;
       }
+
       return 0;
     }
   );
@@ -386,7 +391,7 @@ const displayRanking = () => {
   rankingSorter();
   console.table(rankingSorted);
 
-  let informationPannel = [];
+  const informationPannel = [];
 
   for (let i = 0; i < Object.values(rankingSorted).length; i++) {
     rankingSorted[
@@ -394,6 +399,7 @@ const displayRanking = () => {
     ].string = `${rankingSorted[i].username} answered ${rankingSorted[i].correctAnswers} answers correctly and ${rankingSorted[i].wrongAnswers} incorrectly. ${rankingSorted[i].username} finished the game with ${rankingSorted[i].secondsLeft} seconds left.\n`;
     informationPannel.push(rankingSorted[i].string);
   }
+
   return alert(informationPannel.join(" "));
 };
 
@@ -440,11 +446,11 @@ const endGame = () => {
 
     recordScore();
     return displayRanking();
-  } else {
-    return alert(
-      `You aborted the game.\n\n You got ${state.correctAnswers} questions right.`
-    );
   }
+
+  return alert(
+    `You aborted the game.\n\n You got ${state.correctAnswers} questions right.`
+  );
 };
 
 const introduction = () => {
@@ -478,6 +484,7 @@ const gameFlow = () => {
     checkIfWeCountTheAnswer();
     skipToNextLetterUnanswered();
   } while (state.stillPlaying);
+
   playAnotherRound();
 };
 

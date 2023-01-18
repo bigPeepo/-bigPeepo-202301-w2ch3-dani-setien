@@ -1,6 +1,6 @@
-let SpeechRecognition = webkitSpeechRecognition;
-let SpeechGrammarList = window.webkitSpeechGrammarList;
-let SpeechRecognitionEvent = webkitSpeechRecognitionEvent;
+const SpeechRecognition = webkitSpeechRecognition;
+const SpeechGrammarList = window.webkitSpeechGrammarList;
+const SpeechRecognitionEvent = webkitSpeechRecognitionEvent;
 
 const recognition = new SpeechRecognition();
 
@@ -25,8 +25,3 @@ recognition.onresult = function (event) {
 recognition.onspeechend = function () {
   recognition.stop();
 };
-
-/* recognition.onerror = function (event) {
-  diagnostic.textContent = "Error occurred in recognition: " + event.error;
-};
- */

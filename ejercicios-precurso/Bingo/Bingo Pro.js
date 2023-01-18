@@ -7,6 +7,7 @@ const username = () => {
       alert(`You need to pick a username.`);
     }
   } while (!user);
+
   return user;
 };
 
@@ -19,7 +20,7 @@ let line2Completed = false;
 let line3Completed = false;
 let counter = 0;
 let score = 0;
-let scoreboard = [];
+const scoreboard = [];
 let unhappyAboutBingoCard = true;
 const NUMBER_MINIMUM = 1;
 const NUMBER_MAXIMUM = 50;
@@ -56,9 +57,7 @@ const clearStatus = () => {
   score = 0;
 };
 
-const compareNumbers = (a, b) => {
-  return a - b;
-};
+const compareNumbers = (a, b) => a - b;
 
 const generateBingoCard = () => {
   clearStatus();
@@ -75,9 +74,7 @@ const generateBingoCard = () => {
   return bingoCardDisplayer();
 };
 
-const pad = (num) => {
-  return (num < 10 ? "0" : "") + num;
-};
+const pad = (num) => (num < 10 ? "0" : "") + num;
 
 const bingoCardDisplayer = () => {
   console.clear();
@@ -111,9 +108,9 @@ const changeBingoCard = () => {
     )
   ) {
     return generateBingoCard();
-  } else {
-    unhappyAboutBingoCard = false;
   }
+
+  unhappyAboutBingoCard = false;
 };
 
 const numbersPicked = (randomNumber) => {
@@ -159,10 +156,12 @@ const checkForLine = () => {
     line1Completed = true;
     lineOrBingo();
   }
+
   if (lineTwo.every((number) => number === "❌") && line2Completed === false) {
     line2Completed = true;
     lineOrBingo();
   }
+
   if (
     lineThree.every((number) => number === "❌") &&
     line3Completed === false
@@ -175,7 +174,7 @@ const checkForLine = () => {
 const line = () => alert(`Congratulations, ${user}!\n\nYou called LINE!`);
 
 const bingo = () => {
-  let scoreboardPannel = [];
+  const scoreboardPannel = [];
   finished = true;
 
   alert(
@@ -204,9 +203,9 @@ const lineOrBingo = () => {
   if (counter === 3) {
     scoreboard.push(score);
     return bingo();
-  } else {
-    return line();
   }
+
+  return line();
 };
 
 const scoreCounter = () => {

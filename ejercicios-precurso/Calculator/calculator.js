@@ -1,4 +1,4 @@
-let numberList = [];
+const numberList = [];
 
 alert(
   "Welcome to Calculator.\nInput one number to get it's square root, input a second one to show a series of operations."
@@ -23,8 +23,8 @@ function calculator() {
       continue;
     }
 
-    if (!isNaN(promptValue) && !!promptValue) {
-      numberList.push(+promptValue);
+    if (!isNaN(promptValue) && Boolean(promptValue)) {
+      numberList.push(Number(promptValue));
     }
   } while (numberList.length < 2);
 
