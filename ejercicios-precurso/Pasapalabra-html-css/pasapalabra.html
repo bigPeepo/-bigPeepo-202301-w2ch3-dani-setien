@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pasapalabra JS-HTML-CSS</title>
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://1.bp.blogspot.com/-elsdo_DMWIY/XAroEnhfTRI/AAAAAAAAAmQ/26qk3LVhLMIjHYlnk0cVB2QDlvDfW4eXACLcBGAs/s1600/Rosco.PNG"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap");
+    </style>
+  </head>
+
+  <body>
+    <div class="video-and-letters-container">
+      <div class="video-container">
+        <video autoplay="true" id="video-element"></video>
+      </div>
+
+      <div class="circle" style="--total: 26" id="rosco">
+        <div class="letter-container" id="A" style="--i: 1">A</div>
+        <div class="letter-container" id="B" style="--i: 2">B</div>
+        <div class="letter-container" id="C" style="--i: 3">C</div>
+        <div class="letter-container" id="D" style="--i: 4">D</div>
+        <div class="letter-container" id="E" style="--i: 5">E</div>
+        <div class="letter-container" id="F" style="--i: 6">F</div>
+        <div class="letter-container" id="G" style="--i: 7">G</div>
+        <div class="letter-container" id="H" style="--i: 8">H</div>
+        <div class="letter-container" id="I" style="--i: 9">I</div>
+        <div class="letter-container" id="J" style="--i: 10">J</div>
+        <div class="letter-container" id="K" style="--i: 11">K</div>
+        <div class="letter-container" id="L" style="--i: 12">L</div>
+        <div class="letter-container" id="M" style="--i: 13">M</div>
+        <div class="letter-container" id="N" style="--i: 14">N</div>
+        <div class="letter-container" id="O" style="--i: 15">O</div>
+        <div class="letter-container" id="P" style="--i: 16">P</div>
+        <div class="letter-container" id="Q" style="--i: 17">Q</div>
+        <div class="letter-container" id="R" style="--i: 18">R</div>
+        <div class="letter-container" id="S" style="--i: 19">S</div>
+        <div class="letter-container" id="T" style="--i: 20">T</div>
+        <div class="letter-container" id="U" style="--i: 21">U</div>
+        <div class="letter-container" id="V" style="--i: 22">V</div>
+        <div class="letter-container" id="W" style="--i: 23">W</div>
+        <div class="letter-container" id="X" style="--i: 24">X</div>
+        <div class="letter-container" id="Y" style="--i: 25">Y</div>
+        <div class="letter-container" id="Z" style="--i: 26">Z</div>
+      </div>
+    </div>
+    <div class="ranking-container hidden" id="ranking-container">
+      <div id="ranking-header">TOP SCORES</div>
+      <div id="ranking">
+        <div id="rank-names" class="score-container">
+          <div class="name">username</div>
+          <div class="name">correct answers</div>
+          <div class="name">wrong answers</div>
+          <div class="name">seconds left</div>
+        </div>
+        <div id="1" class="score-container">
+          <div class="username">Johnny</div>
+          <div class="correct-answers"></div>
+          <div class="wrong-answers"></div>
+          <div class="seconds-left"></div>
+        </div>
+        <div class="score-container" id="2">
+          <div class="username"></div>
+          <div class="correct-answers"></div>
+          <div class="wrong-answers"></div>
+          <div class="seconds-left"></div>
+        </div>
+        <div class="score-container" id="3">
+          <div class="username"></div>
+          <div class="correct-answers"></div>
+          <div class="wrong-answers"></div>
+          <div class="seconds-left"></div>
+        </div>
+        <div class="score-container" id="4">
+          <div class="username"></div>
+          <div class="correct-answers"></div>
+          <div class="wrong-answers"></div>
+          <div class="seconds-left"></div>
+        </div>
+        <div class="score-container" id="5">
+          <div class="username"></div>
+          <div class="correct-answers"></div>
+          <div class="wrong-answers"></div>
+          <div class="seconds-left"></div>
+        </div>
+      </div>
+      <div class="options-button-container">
+        <button class="button yellow" id="play-again">Play again</button>
+        <button class="button orange" id="end-game">End game</button>
+      </div>
+    </div>
+    <div class="pannel" id="pannel">
+      <div class="question-container">
+        <div id="question-header">Introduction</div>
+        <div id="current-question">
+          Welcome to Pasapalabra. You will be asked a question for every letter
+          of the alphabet. The word that answers said question can either start
+          with that letter or contain that letter, so be careful when reading
+          the question!
+        </div>
+
+        <div id="form-buttons-container" class="hidden">
+          <form id="answer-buttons-container">
+            <div class="text-form">
+              <input
+                type="text"
+                name="answer"
+                placeholder="answer"
+                id="text-input"
+              />
+            </div>
+            <div class="buttons-container">
+              <button class="button mint-green" id="submit" from="newAnswer">
+                Submit
+              </button>
+              <button class="button yellow" id="record">🎤</button>
+              <button class="button orange" id="pasapalabra">
+                Pasapalabra
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div id="next-container">
+        <button class="button orange" id="next">Next</button>
+      </div>
+      <div class="score-timer-container hidden" id="score-timer-display">
+        <div class="counter">
+          <div class="green counter center" id="correct-answers"></div>
+          <div class="red counter center" id="wrong-answers"></div>
+        </div>
+        <div class="timer-container center">
+          <div class="semicircles"></div>
+          <div class="semicircles"></div>
+          <div class="semicircles"></div>
+          <div class="semicircles"></div>
+          <div class="outermost-circle"></div>
+          <div id="innermost-circle"></div>
+          <div class="timer" id="timer">00</div>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="pasapalabra.js"></script>
+  </body>
+</html>
