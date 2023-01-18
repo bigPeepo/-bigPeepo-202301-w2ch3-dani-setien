@@ -1,0 +1,38 @@
+body, html {
+  margin: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 800px;
+  height: inherit;
+  overflow: hidden;
+}
+
+h1, p {
+  padding: 20px;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+div {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(255 255 255 / 20%);
+  height: 100px;
+  overflow: auto;
+}
+
+ul {
+  margin: 0;
+}
+
+.hints span {
+  text-shadow: 0 0 6px rgb(255 255 255 / 70%);
+}
