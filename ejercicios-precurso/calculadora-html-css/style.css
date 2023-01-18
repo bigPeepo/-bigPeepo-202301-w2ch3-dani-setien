@@ -1,0 +1,103 @@
+html {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(245 245 245);
+    min-height: 100%;
+    color: white;
+    font-family: sans-serif;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 3fr 5fr;
+    border-radius: 8vmin;
+    box-shadow: rgb(0 0 0 / 52.6%) 0 5vh 15vh;
+    background-color: rgb(13 13 13);
+    width: 56vh;
+    height: 90vh;
+}
+
+#displayid {
+    align-self: flex-end;
+    justify-self: flex-end;
+    padding-right: 4vh;
+    font-size: 11vh;
+    font-weight: lighter;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1vh;
+    max-height: 100%;
+    font-size: 4vh;
+}
+
+.buttons div {
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    margin: 0.8vh;
+    border-radius: 50%;
+    background-color: rgb(59 59 59);
+    width: 10vh;
+    height: 10vh;
+}
+
+.orange {
+    background-color: orange;
+}
+
+
+.double {
+    border-radius: 15ch;
+    background-color: rgb(59 59 59);
+    width: 23.5vh;
+    height: 10vh;
+}
+
+.bottom-row {
+    margin-bottom: 2vh;
+}
+
+.light-gray {
+    background-color: rgb(171 171 171);
+    color: rgb(13 13 13);
+}
+
+.button:hover {
+    transition: 0.2s ease-in-out;
+    background-color: rgb(109 109 109);
+}
+
+.button:active {
+    box-shadow: rgb(52 52 52 / 79.7%) 0 30px 60px -12px inset, rgb(0 0 0 / 52.4%) 0 18px 36px -18px inset;
+}
+
+.light-gray:hover {
+    transition: 0.2s ease-in-out;
+    background-color: rgb(208 208 208);
+}
+
+.orange:hover {
+    transition: 0.2s ease-in-out;
+    background-color: rgb(254 213 136);
+}
+
+
+.active {
+    background-color: white;
+    color: orange;
+}
